@@ -36,7 +36,7 @@ button{
 <div id="login">
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-  <button onclick="alert('BUTTON WORKS')">Login</button>
+  <button onclick="login()">Login</button>
 </div>
 <div id="app">
   <h2>Logged In</h2>
@@ -51,27 +51,7 @@ const supabase = window.supabase.createClient(
 );
 
 async function login() {
-
-  const email =
-    document.getElementById("email").value;
-
-  const password =
-    document.getElementById("password").value;
-
-  const { error } =
-    await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-  if (error) {
-    alert("ERROR: " + error.message);
-    return;
-  }
-
-  alert("SUCCESS");
-
-  loadUser();
+  alert("LOGIN FUNCTION RUNNING");
 }
 
 async function loadUser() {
