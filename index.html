@@ -78,7 +78,6 @@ const supabase = window.supabase.createClient(
 
 alert("Client created");
 async function login() {
-  alert("login function started");
 
   const email =
     document.getElementById("email").value;
@@ -86,9 +85,20 @@ async function login() {
   const password =
     document.getElementById("password").value;
 
-  alert(email);
+  const { data, error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
 
-  alert(password);
+  if (error) {
+    alert("ERROR: " + error.message);
+    return;
+  }
+
+  alert("SUCCESS");
+
+  loadUser();
 }
 
 async function loadUser(){
