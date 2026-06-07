@@ -51,8 +51,26 @@ const supabase = window.supabase.createClient(
 
 alert(“CLIENT CREATED”);
 
-window.login = function() {
-alert(“LOGIN WORKS”);
+window.login = async function() {
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const { error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if (error) {
+    alert("ERROR: " + error.message);
+    return;
+  }
+
+  alert("SUCCESS");
 };
 
 } catch (e) {
