@@ -1,66 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Company D Timesheets v99</title>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-    body{
-      font-family:Arial,sans-serif;
-      max-width:500px;
-      margin:40px auto;
-      padding:20px;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Company D Timesheets</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+body{
+  font-family: Arial, sans-serif;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+}
 
-    input{
-      width:100%;
-      padding:12px;
-      margin:8px 0;
-      box-sizing:border-box;
-    }
+input{
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
 
-    button{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-    }
-    #app{
-      display:none;
-    }
-  </style>
-  <style>
-    body{
-      font-family:Arial,sans-serif;
-      max-width:500px;
-      margin:40px auto;
-      padding:20px;
-    }
+button{
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+}
 
-    input{
-      width:100%;
-      padding:12px;
-      margin:8px 0;
-      box-sizing:border-box;
-    }
-
-    button{
-      width:100%;
-      padding:12px;
-      margin-top:10px;
-    }
-
-    #app{
-      display:none;
-    }
-  </style>
+#app{
+  display:none;
+}
+</style>
 </head>
 <body>
-  <h1>Company D Timesheets TEST123</h1>
+<h1>Company D Timesheets</h1>
 <div id="login">
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
+  <button onclick="login()">Login</button>
 </div>
 <div id="app">
   <h2>Logged In</h2>
@@ -69,82 +45,51 @@
 </div>
 <script>
 
-alert(typeof window.supabase);
-
 const supabase = window.supabase.createClient(
   "https://fwffeamtqysoipolwkph.supabase.co",
   "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
 );
 
-const supabase = window.supabase.createClient(
-“https://fwffeamtqysoipolwkph.supabase.co”,
-“sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI”
-);
-
 async function login() {
 
-const email =
-document.getElementById(“email”).value;
+  const email =
+    document.getElementById("email").value;
 
-const password =
-document.getElementById(“password”).value;
+  const password =
+    document.getElementById("password").value;
 
-alert(“About to call Supabase”);
+  const { error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
 
-const { data, error } =
-await supabase.auth.signInWithPassword({
-email,
-password
-});
+  if (error) {
+    alert("ERROR: " + error.message);
+    return;
+  }
 
-if (error) {
-alert(“ERROR: “ + error.message);
-return;
+  alert("SUCCESS");
+
+  loadUser();
 }
 
-alert(“SUCCESS”);
-
-loadUser();
-}
-
-async function loadUser(){
-
-const {
-data:{ user }
-} = await supabase.auth.getUser();
-
-if(!user) return;
-
-document.getElementById(“login”).style.display=“none”;
-document.getElementById(“app”).style.display=“block”;
-
-document.getElementById(“userEmail”).innerText =
-user.email;
-}
-
-async function logout(){
-await supabase.auth.signOut();
-location.reload();
-}
-
-loadUser();
-
-async function loadUser(){
+async function loadUser() {
 
   const {
-    data:{ user }
+    data: { user }
   } = await supabase.auth.getUser();
 
-  if(!user) return;
+  if (!user) return;
 
-  document.getElementById("login").style.display="none";
-  document.getElementById("app").style.display="block";
+  document.getElementById("login").style.display = "none";
+  document.getElementById("app").style.display = "block";
 
   document.getElementById("userEmail").innerText =
     user.email;
 }
 
-async function logout(){
+async function logout() {
   await supabase.auth.signOut();
   location.reload();
 }
@@ -154,9 +99,3 @@ loadUser();
 </script>
 </body>
 </html>
-
-  
-
-  
-  
-  
