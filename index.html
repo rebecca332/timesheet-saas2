@@ -76,31 +76,58 @@ const supabase = window.supabase.createClient(
   "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
 );
 
-alert("Client created");
+const supabase = window.supabase.createClient(
+“https://fwffeamtqysoipolwkph.supabase.co”,
+“sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI”
+);
+
 async function login() {
-  alert("VERSION TEST");
+
+const email =
+document.getElementById(“email”).value;
+
+const password =
+document.getElementById(“password”).value;
+
+alert(“About to call Supabase”);
+
+const { data, error } =
+await supabase.auth.signInWithPassword({
+email,
+password
+});
+
+if (error) {
+alert(“ERROR: “ + error.message);
+return;
 }
-  const email =
-    document.getElementById("email").value;
 
-  const password =
-    document.getElementById("password").value;
-alert("About to call Supabase");
-  const { data, error } =
-    await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
+alert(“SUCCESS”);
 
-  if (error) {
-    alert("ERROR: " + error.message);
-    return;
-  }
-
-  alert("SUCCESS");
-
-  loadUser();
+loadUser();
 }
+
+async function loadUser(){
+
+const {
+data:{ user }
+} = await supabase.auth.getUser();
+
+if(!user) return;
+
+document.getElementById(“login”).style.display=“none”;
+document.getElementById(“app”).style.display=“block”;
+
+document.getElementById(“userEmail”).innerText =
+user.email;
+}
+
+async function logout(){
+await supabase.auth.signOut();
+location.reload();
+}
+
+loadUser();
 
 async function loadUser(){
 
