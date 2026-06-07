@@ -41,10 +41,13 @@ button{
   <button onclick="logout()">Logout</button>
 </div>
 <script>
-const supabase = window.supabase.createClient(
-  "https://fwffeamtqysoipolwkph.supabase.co",
-  "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
-);
+alert("BEFORE");
+
+window.login = async function() {
+  alert("LOGIN FUNCTION RUNNING");
+};
+
+alert("AFTER");
 window.login = async function() {
   alert("LOGIN FUNCTION RUNNING");
 };
