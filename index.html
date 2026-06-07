@@ -1,11 +1,134 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Company D Timesheets</title>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Company D Timesheets</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+    body{
+      font-family:Arial,sans-serif;
+      max-width:500px;
+      margin:40px auto;
+      padding:20px;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      margin:8px 0;
+      box-sizing:border-box;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+    }
+
+    #app{
+      display:none;
+    }
+  </style>
+  <style>
+    body{
+      font-family:Arial,sans-serif;
+      max-width:500px;
+      margin:40px auto;
+      padding:20px;
+    }
+
+    input{
+      width:100%;
+      padding:12px;
+      margin:8px 0;
+      box-sizing:border-box;
+    }
+
+    button{
+      width:100%;
+      padding:12px;
+      margin-top:10px;
+    }
+
+    #app{
+      display:none;
+    }
+  </style>
 </head>
 <body>
-<h1>Company D Timesheets</h1>
-<p>GitHub Pages deployment is working.</p>
+  <h1>Company D Timesheets</h1>
+<div id="login">
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+<div id="app">
+  <h2>Logged In</h2>
+  <p id="userEmail"></p>
+  <button onclick="logout()">Logout</button>
+</div>
+<script>
+
+const supabase = window.supabase.createClient(
+  "https://fwffeamtqysoipolwkph.supabase.co",
+  "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
+);
+
+async function login() {
+
+  const email =
+    document.getElementById("email").value;
+
+  const password =
+    document.getElementById("password").value;
+
+  const { error } =
+    await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  loadUser();
+}
+
+async function loadUser(){
+
+  const {
+    data:{ user }
+  } = await supabase.auth.getUser();
+
+  if(!user) return;
+
+  document.getElementById("login").style.display="none";
+  document.getElementById("app").style.display="block";
+
+  document.getElementById("userEmail").innerText =
+    user.email;
+}
+
+async function logout(){
+  await supabase.auth.signOut();
+  location.reload();
+}
+
+loadUser();
+
+</script>
 </body>
 </html>
+
+  
+
+  
+  
+  
