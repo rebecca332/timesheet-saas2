@@ -4,19 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Company D Timesheets</title>
-  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
-<script>
-
-const supabase = window.supabase.createClient(
-  "https://fwffeamtqysoipolwkph.supabase.co",
-  "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
-);
-
-async function login() {
-  alert("LOGIN FUNCTION RUNNING");
-}
-
-</script>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <style>
 body{
   font-family: Arial, sans-serif;
@@ -24,20 +12,17 @@ body{
   margin: 40px auto;
   padding: 20px;
 }
-
 input{
   width: 100%;
   padding: 12px;
   margin: 8px 0;
   box-sizing: border-box;
 }
-
 button{
   width: 100%;
   padding: 12px;
   margin-top: 10px;
 }
-
 #app{
   display:none;
 }
@@ -56,41 +41,16 @@ button{
   <button onclick="logout()">Logout</button>
 </div>
 <script>
-alert("SCRIPT LOADED");
-alert(typeof window.supabase);
 const supabase = window.supabase.createClient(
   "https://fwffeamtqysoipolwkph.supabase.co",
   "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
 );
-window.testLogin = function() {
-  alert("FUNCTION FOUND");
-};
-async function login() {
+window.login = async function() {
   alert("LOGIN FUNCTION RUNNING");
-}
-
-async function loadUser() {
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
-  if (!user) return;
-
-  document.getElementById("login").style.display = "none";
-  document.getElementById("app").style.display = "block";
-
-  document.getElementById("userEmail").innerText =
-    user.email;
-}
-
-async function logout() {
-  await supabase.auth.signOut();
-  location.reload();
-}
-
-loadUser();
-
+};
+window.logout = async function() {
+  alert("LOGOUT FUNCTION RUNNING");
+};
 </script>
 </body>
 </html>
