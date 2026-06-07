@@ -6,8 +6,16 @@
 <title>Company D Timesheets</title>
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
-alert("SCRIPT LOADED");
-alert(typeof window.supabase);
+
+const supabase = window.supabase.createClient(
+  "https://fwffeamtqysoipolwkph.supabase.co",
+  "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
+);
+
+async function login() {
+  alert("LOGIN FUNCTION RUNNING");
+}
+
 </script>
 <style>
 body{
@@ -40,7 +48,7 @@ button{
 <div id="login">
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-  <button onclick="window.testLogin()">Login</button>
+  <button onclick="login()">Login</button>
 </div>
 <div id="app">
   <h2>Logged In</h2>
