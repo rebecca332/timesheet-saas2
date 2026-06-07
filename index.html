@@ -41,22 +41,23 @@ button{
   <button onclick="logout()">Logout</button>
 </div>
 <script>
-alert("BEFORE");
+alert(“BEFORE”);
 
-  alert(typeof window.supabase);
-alert(Object.keys(window.supabase).join(","));
-  
-window.login = async function() {
-  alert("LOGIN FUNCTION RUNNING");
+try {
+const supabase = window.supabase.createClient(
+“https://fwffeamtqysoipolwkph.supabase.co”,
+“sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI”
+);
+
+alert(“CLIENT CREATED”);
+
+window.login = function() {
+alert(“LOGIN WORKS”);
 };
 
-alert("AFTER");
-window.login = async function() {
-  alert("LOGIN FUNCTION RUNNING");
-};
-window.logout = async function() {
-  alert("LOGOUT FUNCTION RUNNING");
-};
+} catch (e) {
+alert(“ERROR: “ + e.message);
+}
 </script>
 </body>
 </html>
