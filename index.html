@@ -36,7 +36,7 @@ button{
 <div id="login">
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-  <button onclick="alert('LOGIN BUTTON CLICKED')">Login</button>
+  <button onclick="window.testLogin()">Login</button>
 </div>
 <div id="app">
   <h2>Logged In</h2>
@@ -49,7 +49,9 @@ const supabase = window.supabase.createClient(
   "https://fwffeamtqysoipolwkph.supabase.co",
   "sb_publishable_By6EwficXXgcaQlFHhte0w_JrYVVIdI"
 );
-
+window.testLogin = function() {
+  alert("FUNCTION FOUND");
+};
 async function login() {
   alert("LOGIN FUNCTION RUNNING");
 }
