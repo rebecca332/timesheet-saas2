@@ -60,7 +60,7 @@
 <div id="login">
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
-<button onclick="alert('Button works')">Login</button>  
+<button onclick="login()">Login</button>
 </div>
 <div id="app">
   <h2>Logged In</h2>
@@ -75,25 +75,17 @@ const supabase = window.supabase.createClient(
 );
 
 async function login() {
-alert("Login button clicked");
+  alert("login function started");
+
   const email =
     document.getElementById("email").value;
 
   const password =
     document.getElementById("password").value;
 
-  const { error } =
-    await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
+  alert(email);
 
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  loadUser();
+  alert(password);
 }
 
 async function loadUser(){
