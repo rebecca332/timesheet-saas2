@@ -43,6 +43,9 @@ button{
 <script>
 alert("BEFORE");
 
+  alert(typeof window.supabase);
+alert(Object.keys(window.supabase).join(","));
+  
 window.login = async function() {
   alert("LOGIN FUNCTION RUNNING");
 };
